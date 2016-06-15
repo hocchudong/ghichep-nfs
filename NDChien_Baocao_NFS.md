@@ -90,9 +90,9 @@ Muốn chặn hoặc cho phép một host hoặc network thì thêm vào file de
 Để sử dụng dịch vụ NFS, cần có các daemon (dịch vụ chạy ngầm trên hệ thống) sau:
 
 <ul>
-<li>Portmap: Quản lý các kết nối, sử dụng cơ chế RPC (Remote Procedure Call), dịch vụ chạy trên port 2049 và 111 ở cả server và client.</li>
-<li>NFS: Khởi động các tiến trình RPC khi được yêu cầu để phục vụ cho chia sẻ file, dịch vụ chỉ chạy trên server.</li>
-<li>NFS lock: Sử dụng cho client khóa các file trên NFS server thông qua PRC.</li>
+<li>**Portmap**: Quản lý các kết nối, dịch vụ chạy trên port 2049 và 111 ở cả server và client.</li>
+<li>**NFS**: Khởi động các tiến trình RPC (Remote Procedure Call) khi được yêu cầu để phục vụ cho chia sẻ file, dịch vụ chỉ chạy trên server.</li>
+<li>**NFS lock**: Sử dụng cho client khóa các file trên NFS server thông qua RPC.</li>
 </ul>
 
 **2.2.1 Khởi động portmapper**
@@ -106,12 +106,12 @@ Nó nên được đặt tại /sbin nhưng đôi khi trong /usr/sbin. Hầu h�
 Dịch vụ NFS được hỗ trợ bởi 5 tiến trình ngầm:
 
 <ul>
-<li>rpc.nfsd- thực hiện hầu hết mọi công việc.</li>
-<li>rpc.lockd and rpc.statd-quản lý việc khóa các file.</li>
-<li>rpc.mountd-quản lý các yêu cầu gắn kết lúc ban đầu.</li>
-<li>rpc.rquotad-quản lý các hạn mức truy cập file của người sử dụng trên server được truy xuất.</li>
-<li>lockd được gọi theo yêu cầu của nfsd. Vì thế bạn cũng không cần quan tâm lắm tới việc khởi động nó.</li>
-<li>statd thì cần phải được khởi động riêng.</li>
+<li>**rpc.nfsd**: thực hiện hầu hết mọi công việc.</li>
+<li>**rpc.lockd and rpc.statd**: quản lý việc khóa các file.</li>
+<li>**rpc.mountd**: quản lý các yêu cầu gắn kết lúc ban đầu.</li>
+<li>**rpc.rquotad**: quản lý các hạn mức truy cập file của người sử dụng trên server được truy xuất.</li>
+<li>**lockd**: được gọi theo yêu cầu của nfsd. Vì thế bạn cũng không cần quan tâm lắm tới việc khởi động nó.</li>
+<li>**statd**: thì cần phải được khởi động riêng.</li>
 </ul>
 
 Tuy nhiên trong các bản phân phối linux gần đây đều có kịch bản khởi động cho các tiến trình trên.
@@ -134,7 +134,7 @@ rpc.nfsd
 ####2.4 Cập nhật thay đổi cho /etc/exports
 
 <ul>
-<li>Nếu thay đổi trong /etc/exports, các thay đổi đó có thể chưa có hiệu lực ngay lập tức, bạn phải thực thi lệnh exportfs -ra để bắt nfst cập nhật lại nội dung file /etx/exports .</li>
+<li>Nếu thay đổi trong /etc/exports, các thay đổi đó có thể chưa có hiệu lực ngay lập tức, bạn phải thực thi lệnh **exportfs -ra** để bắt nfst cập nhật lại nội dung file /etx/exports .</li>
 <li>Nếu không tìm thấy lệnh exportfs thì bạn có thể kết thúc nfsd với lệnh HUD.</li>
 <li>Nếu các việc đó không hoạt động, đừng quên kiểm tra lại hosts.allow để đảm bảo rằng bạn không quên việc khai báo danh sách các máy con trong đấy. Ngoài ra cũng nên kiểm tra danh sách các máy chủ trên bất kỳ hệ thống tường lửa nào mà bạn đã thiết lập.</li>
 </ul>
@@ -162,12 +162,12 @@ Chỉnh sửa file **fstab** bên phía client. Để đảm bảo cho hoạt đ
 
 ####Chú ý
 
-- Có thể cấu hình tùy chọn kích thước gói dữ liệu để tối ưu khi truyền với options **rsize** và wsize**
+- Có thể cấu hình tùy chọn kích thước gói dữ liệu để tối ưu khi truyền với options **rsize** và **wsize**
 - Không đặt rsize và wsize lớn hơn MTU của mạng truyền.
 - Dùng **nfsstat** để có thêm thông tin về hoạt động của NFS.
 
-- Thay đổi port cho statd: # statd -p 32765 -o 32766
-- Thay đổi port mountd: # mountd -p 32767
+- Thay đổi port cho statd: `statd -p 32765 -o 32766`
+- Thay đổi port mountd: `mountd -p 32767`
 				
 - Dùng ssh để đổi port hoạt động	
 ```sh
