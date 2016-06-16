@@ -163,7 +163,9 @@ Chỉnh sửa file **fstab** bên phía client. Để đảm bảo cho hoạt đ
 ####Chú ý
 
 - Có thể cấu hình tùy chọn kích thước gói dữ liệu để tối ưu khi truyền với options **rsize** và **wsize** 
+
 link tham khảo: http://blogit.edu.vn/toi-uu-he-thong-nfs/
+
 - Không đặt rsize và wsize lớn hơn MTU của mạng truyền.
 - Dùng **nfsstat** để có thêm thông tin về hoạt động của NFS.
 
