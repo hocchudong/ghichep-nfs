@@ -162,7 +162,10 @@ Chỉnh sửa file **fstab** bên phía client. Để đảm bảo cho hoạt đ
 
 ####Chú ý
 
-- Có thể cấu hình tùy chọn kích thước gói dữ liệu để tối ưu khi truyền với options **rsize** và **wsize**
+- Có thể cấu hình tùy chọn kích thước gói dữ liệu để tối ưu khi truyền với options **rsize** và **wsize** 
+
+link tham khảo: http://blogit.edu.vn/toi-uu-he-thong-nfs/
+
 - Không đặt rsize và wsize lớn hơn MTU của mạng truyền.
 - Dùng **nfsstat** để có thêm thông tin về hoạt động của NFS.
 
@@ -181,7 +184,7 @@ NFS có 2 chế độ mount:
 Mount cứng là ghi trực tiếp vào file /etc/fstab
 Mount mềm là mount bằng lệnh thông thường và bị mất khi máy tính được khởi động lại
 ```
-
+Tối 
 <a name="3"></a>
 ###3 Demo NFS
 
